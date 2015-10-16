@@ -13,28 +13,28 @@ var MenuStore = _.extend({}, EventEmitter.prototype, {
 
     getDefaultMenu: function() {
         return [
-            { type: MenuItem.Types.SUBHEADER, text: 'Menu Items' },
+            { type: MenuItem.Types.SUBHEADER, text: 'Menu' },
             { route: 'blogs', text: 'Blog'},
             { route: 'contactMe', text: 'Contact Me'},
             { type: MenuItem.Types.SUBHEADER, text: 'External'},
             {
                 type: MenuItem.Types.LINK,
-                payload: 'https://github.com/Nicholas Azar',
+                payload: 'https://github.com/NicholasAzar',
                 text: 'GitHub'
             },
             {
                 type: MenuItem.Types.LINK,
-                payload: 'https://github.com/Nicholas Azar',
+                payload: 'https://github.com/NicholasAzar',
                 text: 'LinkedIn'
             },
             {
                 type: MenuItem.Types.LINK,
-                payload: 'https://github.com/Nicholas Azar',
+                payload: 'https://github.com/NicholasAzar',
                 text: 'Facebook'
             },
             {
                 type: MenuItem.Types.LINK,
-                payload: 'https://github.com/Nicholas Azar',
+                payload: 'https://github.com/NicholasAzar',
                 text: 'Twitter'
             }
         ];
