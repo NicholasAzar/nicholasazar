@@ -1,48 +1,26 @@
 var React = require('react');
-var Router = require('react-router');
-var {Link} = require('react-router');
-var {Styles, RaisedButton, AppBar, FlatButton, IconMenu, IconButton, FontIcon} = require('material-ui')
-var MenuItem = require ('material-ui/lib/menus/menu-item');
-var ThemeManager = new Styles.ThemeManager();
-var {Colors, Typography} = Styles;
-var RouteHandler = Router.RouteHandler;
-var FullWidthSection = require('../common/full-width-section.js');
-var AuthStore = require('../../stores/AuthStore.js');
 
-var InlineUser = require('./../user/src/InlineUser.js');
+const AppBar = require('material-ui/lib/app-bar');
+const Colors = require('material-ui/lib/styles/colors');
+const Typography = require('material-ui/lib/styles/typography');
+const ThemeManager = require('material-ui/lib/styles/theme-manager');
+const LightRawTheme = require('material-ui/lib/styles/raw-themes/light-raw-theme');
+const IconButton = require('material-ui/lib/icon-button');
+
+
+var FullWidthSection = require('../common/full-width-section.js');
 
 var LeftNavMenu = require('../menu/LeftNavMenu');
 
+const Theme = require('../../theme.js');
+
+const history = require('../common/history');
+
 var Main = React.createClass({
-    contextTypes: {
-        router: React.PropTypes.func
-    },
-    getChildContext: function() {
-        return {
-            muiTheme: ThemeManager.getCurrentTheme()
-        };
-    },
-
-    getInitialState: function() {
-        return {
-            isLoggedIn: AuthStore.isLoggedIn()
-        };
-    },
-
-    componentDidMount: function() {
-        AuthStore.addChangeListener(this._userLoginChange);
-    },
-
-    _userLoginChange: function() {
-        console.log("Main._userLoginChange", AuthStore.isLoggedIn());
-        this.setState({
-            isLoggedIn: AuthStore.isLoggedIn()
-        })
-    },
 
     _userMenuTouched: function(e, value) {
         console.log("Main._rightMenuChange", value);
-        this.context.router.transitionTo('/' + value._store.props.value);
+        history.replaceState(null, '/' + value._store.props.value);
     },
 
     render: function() {
@@ -60,7 +38,7 @@ var Main = React.createClass({
                 <AppBar title='Nicholas Azar' onLeftIconButtonTouchTap={this.showSideBar} iconElementRight={rightMenu} zDepth={0} style={styles.topMenu}/>
                 <LeftNavMenu ref="leftNav"/>
                 <div className="contentRoot">
-                    <RouteHandler />
+                    {this.props.children}
                 </div>
 
                 <FullWidthSection style={styles.footer}>
@@ -121,14 +99,7 @@ var Main = React.createClass({
     },
     showSideBar: function (e) {
         this.refs.leftNav.toggle()
-    },
-    componentWillMount: function() {
-        ThemeManager.setTheme(ThemeManager.types.LIGHT);
     }
 });
-
-Main.childContextTypes = {
-    muiTheme: React.PropTypes.object
-};
 
 module.exports = Main;

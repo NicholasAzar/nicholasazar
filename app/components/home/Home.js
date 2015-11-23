@@ -3,8 +3,28 @@ var Router = require('react-router');
 var {RaisedButton, Styles} = require('material-ui');
 var FullWidthSection = require('../common/full-width-section.js');
 var { Colors, Spacing, Typography } = Styles;
+var $ = require('jquery');
 
 var Home = React.createClass({
+    componentDidMount: function() {
+      console.log("Home");
+      this.post();
+    },
+
+    post: function() {
+      $.ajax({
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        url: './Home.php',
+        error: function(jqXHR, status, error) {
+          console.log('post error', error);
+        },
+        success: function(result, status, xhr) {
+          console.log('post success', result);
+        }
+      });
+    },
+
     render: function() {
         var styles=this.getStyles();
         return (

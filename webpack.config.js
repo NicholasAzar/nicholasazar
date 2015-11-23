@@ -22,10 +22,11 @@ var host = "localhost";
 var port = "8001";
 var publicPath = "http://" + host + ":" + port + "/";
 
+var outputPath = "/var/www/html/";
 
 module.exports = {
     entry: {
-        app: ['webpack-dev-server/client?http://' + host + ":" + port, 'webpack/hot/dev-server', './app/app.js'],
+        app: ['./app/app.js'],
         vendors: ['react',
             'react-router',
             'jquery',
@@ -40,8 +41,7 @@ module.exports = {
             'material-ui']
     },
     output: {
-        path: __dirname,
-        filename: 'dist/bundle.js',
+        filename: outputPath + 'bundle.js',
         publicPath: publicPath
     },
     module: {
@@ -49,7 +49,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['react-hot', 'babel'],
+                loaders: ['babel'],
                 exclude: [nodeModulesPath]
             },
             {
@@ -70,22 +70,16 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin("vendors", "dist/vendor.bundle.js"),
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.CommonsChunkPlugin("vendors", outputPath + "vendor.bundle.js"),
         new webpack.NoErrorsPlugin(),
-        new ExtractTextPlugin('dist/style.css', {
+        new ExtractTextPlugin(outputPath + 'style.css', {
             allChunks: true
         })
     ],
 
     devServer: {
-        proxy:       [{
-            path:   /\/api(.*)/,
-            target:  'http://example:8080'
-        }],
         port: port,
         publicPath: publicPath,
-        hot: true,
         historyApiFallback: true
     }
 };

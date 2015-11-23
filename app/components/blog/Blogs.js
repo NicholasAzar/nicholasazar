@@ -31,9 +31,8 @@ var Blogs = React.createClass({
         return (
             <div className="blogs">
                 <div className="blogHeader">
-                        <h2 className="mainBlogHeader">NetworkNt Blogs</h2>
+                        <h2 className="mainBlogHeader">Blogs</h2>
                 </div>
-
                 <div className="blogsSection">
                     <div className="blogsDescription">
                         <h1>These are the blogs</h1>

@@ -1,30 +1,27 @@
-"use strict";
-/*jslint node: true */
+import React        from 'react';
+import ReactDOM     from 'react-dom';
+import {Router, Route, IndexRoute} from 'react-router';
+import history      from './components/common/history';
 
-var React = require('react');
-var Router = require('react-router');
-var injectTapEventPlugin = require('react-tap-event-plugin');
-var AppRoutes = require('./routes.js');
-
+var Main = require('./components/main/Main');
+var Home = require('./components/home/Home');
+var Blogs = require('./components/blog/Blogs');
+var Blog = require('./components/blog/Blog');
+var BlogPost = require('./components/blog/BlogPost.js');
 require('./assets/stylesheets/main.scss');
-
 window.React = React;
 
-//Needed for onTouchTap
-//Can go away with the react 1.0 release.
+let injectTapEventPlugin = require('react-tap-event-plugin');
 injectTapEventPlugin();
 
-var router = require('./stores/RouteStore.js').getRouter();
-var rootComponentInstance;
-router.run(function (Handler) {
-    rootComponentInstance = React.render(<Handler/>, document.getElementById('content'));
-});
-
-if (module.hot) {
-    require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
-        getRootInstances: function () {
-            // Help React Hot Loader figure out the root component instances on the page:
-            return [rootComponentInstance];
-        }
-    });
-}
+ReactDOM.render(
+  <Router history={history}>
+    <Route path="/" component={Main}>
+      <IndexRoute component={Home}/>
+      <Route path="blogs" component={Blogs}/>
+      <Route path="blogs/:blogRid" component={Blog}/>
+      <Route path="blogs/:blogRid/:postId" component={BlogPost} />
+      <Route path="*" component={Home}/>
+    </Route>
+  </Router>, document.getElementById('content')
+);

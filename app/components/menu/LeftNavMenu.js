@@ -1,22 +1,31 @@
 var React = require('react');
 var Router = require('react-router');
-var { MenuItem, LeftNav, Styles } = require('material-ui');
-var ThemeManager = Styles.ThemeManager();
-var { Colors, Spacing, Typography } = Styles;
+const LeftNav = require('material-ui/lib/left-nav');
 
 var MenuStore = require('../../stores/MenuStore');
 var MenuActions = require('../../actions/MenuActions');
 
-var LeftNavMenu = React.createClass({
+let Colors = require('material-ui/lib/styles/colors');
+let Typography = require('material-ui/lib/styles/typography');
+let Spacing = require('material-ui/lib/styles/spacing');
 
-    componentWillMount: function() {
-        ThemeManager.setComponentThemes({
-            menuSubheader: {
-                textColor: Colors.green300
-            }
-        });
+var history = require('../common/history');
+
+const ThemeManager = require('material-ui/lib/styles/theme-manager');
+
+var LeftNavMenu = React.createClass({
+    contextTypes: {
+        router: React.PropTypes.func,
+        muiTheme: React.PropTypes.object
     },
 
+    componentWillMount: function() {
+        //this.context.muiTheme.setComponentThemes({
+        //    menuSubheader: {
+        //        textColor: Colors.green300
+        //    }
+        //});
+    },
     getInitialState: function() {
         return {
             menu: []
@@ -28,32 +37,8 @@ var LeftNavMenu = React.createClass({
         MenuActions.getMenu();
     },
 
-    /**
-     * Nested menu's currently broken in material-ui (will redo when fixed)
-     * https://github.com/callemall/material-ui/issues/744
-     *
-     * In the meanwhile, flatten first 2 levels.
-     *
-     * @private
-     */
     _onMenuChange: function() {
-        //var menuItems = MenuStore.getMenu();
         var newMenu = MenuStore.getDefaultMenu();
-        /*for (var i = 0; i < menuItems.length; i++) {
-            if (menuItems[i].out_Own != null && menuItems[i].out_Own.length > 0) {
-                for (var j = 0; j < menuItems[i].out_Own.length; j++) {
-                    newMenu.push({
-                        route: menuItems[i].out_Own[j].path,
-                        text: menuItems[i].out_Own[j].label
-                    })
-                }
-            } else {
-                newMenu.push({
-                    route : menuItems[i].path,
-                    text: menuItems[i].label
-                })
-            }
-        }*/
         this.setState({
             menu: newMenu
         })
@@ -106,34 +91,17 @@ var LeftNavMenu = React.createClass({
         var currentItem;
         for (var i = this.state.menu.length - 1; i >= 0; i--) {
             currentItem = this.state.menu[i];
-            if (currentItem.route && this.context.router.isActive(currentItem.route)) return i;
+            if (currentItem.route) return i;
         }
     },
 
     onLeftNavChange: function(e, key, payload) {
-        this.context.router.transitionTo(payload.route);
+        history.replaceState(null, payload.route);
     },
 
     onHeaderClick: function () {
-        this.context.router.transitionTo('root');
+        history.replaceState(null, '/');
         this.refs.leftNav.close();
-    },
-
-    getChildContext: function() {
-        return {
-            muiTheme: ThemeManager.getCurrentTheme()
-        };
-
     }
-
 });
-
-LeftNavMenu.contextTypes = {
-    router: React.PropTypes.func
-};
-
-LeftNavMenu.childContextTypes = {
-    muiTheme: React.PropTypes.object
-};
-
 module.exports = LeftNavMenu;
