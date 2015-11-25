@@ -6,11 +6,8 @@ var BlogActions = require('../../actions/BlogActions');
 var {List, ListItem, Paper, RaisedButton} = require('material-ui');
 var AppConstants = require('../../constants/AppConstants');
 
-var Navigation = require('react-router').Navigation;
 
 var Blog = React.createClass({
-    mixins: [Navigation],
-
     componentDidMount: function() {
         BlogStore.addChangeListener(this._receiveBlogPosts);
         BlogActions.getBlogPosts("#" + this.props.params.blogRid);

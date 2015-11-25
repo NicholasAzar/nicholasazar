@@ -7,62 +7,36 @@ var BlogActions = {
 
     getBlogs: function() {
         $.ajax({
-            type: 'POST',
-            url: 'http://example:8080/api/rs',
-            data: JSON.stringify({
-                category : 'blog',
-                name : 'getBlogTree',
-                readOnly: true,
-                "data": {
-                    host: AppConstants.host
-                }
-            }),
-            contentType: 'application/json',
-            dataType: 'json',
-            error: function(jqXHR, status, error) {
-                console.log('BlogActions.getBlogs - Error received, using mock data.', error);
-                AppDispatcher.handleAction({
-                    type: AppConstants.ActionTypes.BLOGS_RESPONSE,
-                    json: MockBlogData.getBlogs(),
-                    error: null
-                });
-            },
-            success: function(result, status, xhr) {
-                AppDispatcher.handleAction({
-                    type: AppConstants.ActionTypes.BLOGS_RESPONSE,
-                    json: result,
-                    error: null
-                });
-            }
+          type: 'POST',
+          contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+          dataType: 'json',
+          url: './app/components/blog/Blogs.php',
+          error: function(jqXHR, status, error) {
+            console.log('BlogActions.getBlogs - Error received, using mock data.', error);
+            //setTimeout(this.getBlogs, 10000); // try again every 10 seconds
+          },
+          success: function(result, status, xhr) {
+            AppDispatcher.handleAction({
+              type: AppConstants.ActionTypes.BLOGS_RESPONSE,
+              json: result,
+              error: null
+            });
+          }
         });
     },
 
-    getBlogPosts: function(rid) {
+    getBlogPosts: function(id) {
         $.ajax({
             type: 'POST',
-            url: 'http://example:8080/api/rs',
-            data: JSON.stringify({
-                category : 'blog',
-                name : 'getBlogPost',
-                readOnly: true,
-                "data": {
-                    host: AppConstants.host,
-                    "@rid": rid,
-                    pageNo: 0,
-                    pageSize: 10,
-                    sortDir: 'desc',
-                    sortedBy: 'createDate'
-                }
-            }),
             contentType: 'application/json',
             dataType: 'json',
+            url: './app/components/blog/BlogPosts.php',
+            data: JSON.stringify({
+                blogId : 'id'
+            }),
             error: function(jqXHR, status, error) {
                 console.log('BlogActions.getBlogPosts - Error received, using mock data.', error);
-                AppDispatcher.handleAction({
-                    type: AppConstants.ActionTypes.BLOG_POSTS_RESPONSE,
-                    json: MockBlogData.getBlogPosts(),
-                    error: null
-                });
+                //setTimeout(this.getBlogPosts, 10000); // try again every 10 seconds
             },
             success: function(result, status, xhr) {
                 AppDispatcher.handleAction({

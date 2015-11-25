@@ -42,9 +42,9 @@ var Blogs = React.createClass({
                     <Paper className="blogsList">
                         <List>
                             {
-                                this.state.blogs.map(function (blog) {
+                                this.state.blogs.map(function (blog, index) {
                                     return (
-                                        <BlogRow blog={blog}></BlogRow>
+                                        <BlogRow key={index} blog={blog}></BlogRow>
                                     );
                                 })
                             }

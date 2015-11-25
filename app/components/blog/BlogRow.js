@@ -3,11 +3,9 @@ var {ListItem, Styles, Avatar} = require('material-ui')
 var BlogActions = require('../../actions/BlogActions');
 var { Colors, Spacing, Typography} = Styles;
 
-
-var Navigation = require('react-router').Navigation;
+var history = require('../common/history');
 
 var BlogRow = React.createClass({
-    mixins: [Navigation],
 
     render: function () {
         return (
@@ -15,8 +13,8 @@ var BlogRow = React.createClass({
         );
     },
 
-    _onTouchTap: function () {
-        this.transitionTo('/light-cms/blogs/' + this.props.blog["@rid"].substring(1));
+    _onTouchTap: function (permaLink) {
+      history.replaceState(null, '/blogs/' + permaLink);
     },
 
     _createItems: function (blogs) {
@@ -28,10 +26,12 @@ var BlogRow = React.createClass({
         }
         return (
             <ListItem
+                key={blogs.ID}
+                value={blogs.PERMA_LINK}
                 leftAvatar={this._getLeftAvatar(blogs)}
-                primaryText={this._getPrimaryText(blogs)}
-                secondaryText={blogs.description}
-                onTouchTap={this._onTouchTap}>{children}</ListItem>
+                primaryText={blogs.TITLE}
+                secondaryText={blogs.DESCRIPTION}
+                onTouchTap={this._onTouchTap.bind(this, blogs.PERMA_LINK)}>{children}</ListItem>
         );
     },
 
@@ -43,16 +43,7 @@ var BlogRow = React.createClass({
         return (
             <div className="blogLeftAvatar">{count}</div>
         );
-    },
-
-    _getPrimaryText: function(blogs) {
-        return (
-            <p>
-                {blogs.blogId}
-            </p>
-        );
     }
-
 });
 
 module.exports = BlogRow;
