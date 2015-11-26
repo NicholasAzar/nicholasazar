@@ -10,7 +10,8 @@ var AppConstants = require('../../constants/AppConstants');
 var Blog = React.createClass({
     componentDidMount: function() {
         BlogStore.addChangeListener(this._receiveBlogPosts);
-        BlogActions.getBlogPosts("#" + this.props.params.blogRid);
+        console.log("blogPermaLink", this.props.params.blogPermaLink);
+        BlogActions.getBlogPosts(this.props.params.blogPermaLink);
     },
 
     getInitialState: function() {

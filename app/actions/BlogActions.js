@@ -10,7 +10,7 @@ var BlogActions = {
           type: 'POST',
           contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
           dataType: 'json',
-          url: './app/components/blog/Blogs.php',
+          url: '/app/components/blog/Blogs.php',
           error: function(jqXHR, status, error) {
             console.log('BlogActions.getBlogs - Error received, using mock data.', error);
             //setTimeout(this.getBlogs, 10000); // try again every 10 seconds
@@ -25,15 +25,15 @@ var BlogActions = {
         });
     },
 
-    getBlogPosts: function(id) {
+    getBlogPosts: function(blogPermaLink) {
         $.ajax({
             type: 'POST',
-            contentType: 'application/json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             dataType: 'json',
-            url: './app/components/blog/BlogPosts.php',
-            data: JSON.stringify({
-                blogId : 'id'
-            }),
+            url: '/app/components/blog/BlogPosts.php',
+            data: {
+              blogPermaLink: blogPermaLink
+            },
             error: function(jqXHR, status, error) {
                 console.log('BlogActions.getBlogPosts - Error received, using mock data.', error);
                 //setTimeout(this.getBlogPosts, 10000); // try again every 10 seconds

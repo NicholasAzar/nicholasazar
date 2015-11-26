@@ -19,8 +19,8 @@ ReactDOM.render(
     <Route path="/" component={Main}>
       <IndexRoute component={Home}/>
       <Route path="blogs" component={Blogs}/>
-      <Route path="blogs/:blogRid" component={Blog}/>
-      <Route path="blogs/:blogRid/:postId" component={BlogPost} />
+      <Route path="blogs/:blogPermaLink" component={Blog}/>
+      <Route path="blogs/:blogPermaLink/:postId" component={BlogPost} />
       <Route path="*" component={Home}/>
     </Route>
   </Router>, document.getElementById('content')

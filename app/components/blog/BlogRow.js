@@ -26,12 +26,12 @@ var BlogRow = React.createClass({
         }
         return (
             <ListItem
-                key={blogs.ID}
-                value={blogs.PERMA_LINK}
+                key={blogs.BLOG_ID}
+                value={blogs.BLOG_PERMA_LINK}
                 leftAvatar={this._getLeftAvatar(blogs)}
-                primaryText={blogs.TITLE}
-                secondaryText={blogs.DESCRIPTION}
-                onTouchTap={this._onTouchTap.bind(this, blogs.PERMA_LINK)}>{children}</ListItem>
+                primaryText={blogs.BLOG_TITLE}
+                secondaryText={blogs.BLOG_DESCRIPTION}
+                onTouchTap={this._onTouchTap.bind(this, blogs.BLOG_PERMA_LINK)}>{children}</ListItem>
         );
     },
 
