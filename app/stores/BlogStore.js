@@ -1,15 +1,21 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var AppConstants = require('../constants/AppConstants');
+var BlogConstants = require('../constants/BlogConstants');
 var _ = require('underscore');
 
 var _blogs = [];
+var _currentBlog = {};
 var _blogPosts = [];
 var _post = {};
 
 var BlogStore = _.extend({}, EventEmitter.prototype, {
     getBlogs: function() {
         return _blogs;
+    },
+
+    getCurrentBlog: function() {
+        return _currentBlog;
     },
 
     getBlogPosts: function() {
@@ -49,6 +55,10 @@ AppDispatcher.register(function(payload) {
     } else if (data.type === AppConstants.ActionTypes.BLOG_POST_RESPONSE) {
         console.log("BlogStore received BLOG_POST:", data.json);
         _post = data.json;
+        BlogStore.emitChange();
+    } else if (data.type === BlogConstants.ActionTypes.SET_CURRENT_BLOG) { // When opening a blog, set this.
+        console.log("BlogStore receive SET_CURRENT_BLOG:", data.json);
+        _currentBlog = data.json;
         BlogStore.emitChange();
     }
     return true;

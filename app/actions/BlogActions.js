@@ -1,5 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
+var BlogConstants = require('../constants/BlogConstants');
 var MockBlogData = require('../components/blog/MockBlogData');
 var $ = require('jquery');
 
@@ -25,20 +26,30 @@ var BlogActions = {
         });
     },
 
+    setCurrentBlog: function(blog)  {
+        console.log("BlogActions setCurrentBlog", blog);
+        AppDispatcher.handleAction({
+          type: BlogConstants.ActionTypes.SET_CURRENT_BLOG,
+          json: blog,
+          error: null
+        });
+    },
+
     getBlogPosts: function(blogPermaLink) {
         $.ajax({
             type: 'POST',
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            dataType: 'json',
             url: '/app/components/blog/BlogPosts.php',
+            dataType: 'json',
             data: {
               blogPermaLink: blogPermaLink
             },
             error: function(jqXHR, status, error) {
-                console.log('BlogActions.getBlogPosts - Error received, using mock data.', error);
+                console.log('BlogActions.getBlogPosts - Error received, using mock data.', status, error);
                 //setTimeout(this.getBlogPosts, 10000); // try again every 10 seconds
             },
             success: function(result, status, xhr) {
+                console.log('BlogActions.getBlogPosts - Success received.', result);
                 AppDispatcher.handleAction({
                     type: AppConstants.ActionTypes.BLOG_POSTS_RESPONSE,
                     json: result,

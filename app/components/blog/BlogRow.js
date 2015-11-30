@@ -14,14 +14,16 @@ var BlogRow = React.createClass({
     },
 
     _onTouchTap: function (permaLink) {
+      BlogActions.setCurrentBlog(this.props.blog);
       history.replaceState(null, '/blogs/' + permaLink);
     },
+
 
     _createItems: function (blogs) {
         var children;
         if (blogs.out_Own) {
             children = blogs.out_Own.map(function (child) {
-                return this._createItems(child);
+                return this._createItems(child); // on dat recursive level sheeee
             }.bind(this));
         }
         return (

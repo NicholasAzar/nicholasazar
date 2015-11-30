@@ -20,7 +20,7 @@ ReactDOM.render(
       <IndexRoute component={Home}/>
       <Route path="blogs" component={Blogs}/>
       <Route path="blogs/:blogPermaLink" component={Blog}/>
-      <Route path="blogs/:blogPermaLink/:postId" component={BlogPost} />
+      <Route path="blogs/:blogPermaLink/:postPermaLink" component={BlogPost} />
       <Route path="*" component={Home}/>
     </Route>
   </Router>, document.getElementById('content')

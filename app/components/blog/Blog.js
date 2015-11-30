@@ -6,11 +6,11 @@ var BlogActions = require('../../actions/BlogActions');
 var {List, ListItem, Paper, RaisedButton} = require('material-ui');
 var AppConstants = require('../../constants/AppConstants');
 
+var history = require('../common/history');
 
 var Blog = React.createClass({
     componentDidMount: function() {
         BlogStore.addChangeListener(this._receiveBlogPosts);
-        console.log("blogPermaLink", this.props.params.blogPermaLink);
         BlogActions.getBlogPosts(this.props.params.blogPermaLink);
     },
 
@@ -25,33 +25,35 @@ var Blog = React.createClass({
             blogPosts: BlogStore.getBlogPosts()
         })
     },
-    _routeToPost: function(postRid) {
-        this.transitionTo("/blogs/" + this.props.params.blogRid + "/" + postRid.substring(1));
+    _routeToPost: function(BLOG_POST_PERMA_LINK) {
+        history.replaceState(null, '/blogs/' + BlogStore.getCurrentBlog().BLOG_PERMA_LINK + '/' + BLOG_POST_PERMA_LINK);
     },
 
     render: function() {
         return (
             <div>
                 <div className="blogHeader">
-                    <h2 className="mainBlogHeader">NetworkNt Blogs</h2>
+                    <h2 className="mainBlogHeader">Blogs</h2>
                 </div>
                 <div className="blogRoot">
                     <div className="blogPostsRoot">
                         <div className="blogPostsleftColumn">
                             {
                                 this.state.blogPosts.map(function(post) {
-                                    var date = new Date(post.createDate);
-                                    var boundClick = this._routeToPost.bind(this, post.rid);
+                                    var dateArray = post.CREATE_DTTM.split(/[- :]/);
+                                    var date = new Date(dateArray[0], dateArray[1]-1, dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
+
+                                    var boundClick = this._routeToPost.bind(this, post.BLOG_POST_PERMA_LINK);
                                     return (
                                         <span>
                                             <Paper className="blogPostsPaper">
                                                 <div className="blogPost">
                                                     <h2>
-                                                        <strong className="strongDate">{AppConstants.monthNames[date.getMonth()]} {date.getDay()},</strong> <span className="year">{date.getFullYear()}</span>
+                                                        <strong className="strongDate">{AppConstants.monthNames[date.getMonth()]} {date.getDate()},</strong> <span className="year">{date.getFullYear()}</span>
                                                     </h2>
-                                                    <h1 className="title"><a onClick={boundClick}>{post.title}</a></h1>
+                                                    <h1 className="title"><a onClick={boundClick}>{post.BLOG_POST_TITLE}</a></h1>
                                                     <p className="content">
-                                                        {post.content}
+                                                        {post.BLOG_POST_DESCRIPTION}
                                                     </p>
                                                 </div>
                                             </Paper>
@@ -64,14 +66,12 @@ var Blog = React.createClass({
                         <div className="blogPostsRightColumn">
                             <div className="blogInfo">
                                 <h1>Blog Information</h1>
-                                <p>In this section, you will see some information and references pertaining to the opened blog.</p>
-                                <p>Also, having the screen width be less then 64em will hide it, leaving reading room for mobile users only concerned with reading post content on the go.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci alias cum, cumque cupiditate ea eum itaque, minus molestias necessitatibus nihil pariatur perspiciatis quam quas quod rem repellat, sint voluptate.</p>
+                                <p>{BlogStore.getCurrentBlog().BLOG_INFORMATION}</p>
                             </div>
                         </div>
                     </div>
 
-                    <Link to="/light-cms/blogs">
+                    <Link to="/blogs">
                         <RaisedButton label="Back"/>
                     </Link>
                 </div>

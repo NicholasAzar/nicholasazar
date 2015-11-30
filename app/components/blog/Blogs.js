@@ -35,9 +35,11 @@ var Blogs = React.createClass({
                 </div>
                 <div className="blogsSection">
                     <div className="blogsDescription">
-                        <h1>These are the blogs</h1>
+                        <h1>These are the blogs.</h1>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam commodi dolores, esse et id minus mollitia nemo, odio omnis qui rem voluptatem voluptatibus? Commodi dolorum fugit numquam quasi, similique soluta!</p>
+                        <p>Splitting up and categorizing blogs helps you to only see the post you want! Select any blog
+                        from the selection to check out the posts.<br />
+                        </p>
                     </div>
                     <Paper className="blogsList">
                         <List>
