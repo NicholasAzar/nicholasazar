@@ -5,7 +5,7 @@ var BlogStore = require('../../stores/BlogStore');
 var BlogActions = require('../../actions/BlogActions');
 var {List, ListItem, Paper, RaisedButton} = require('material-ui');
 var AppConstants = require('../../constants/AppConstants');
-
+var BlogConstants = require('../../constants/BlogConstants');
 var history = require('../common/history');
 
 var Blog = React.createClass({
@@ -25,15 +25,17 @@ var Blog = React.createClass({
             blogPosts: BlogStore.getBlogPosts()
         })
     },
-    _routeToPost: function(BLOG_POST_PERMA_LINK) {
-        history.replaceState(null, '/blogs/' + BlogStore.getCurrentBlog().BLOG_PERMA_LINK + '/' + BLOG_POST_PERMA_LINK);
+    _routeToPost: function(post) {
+        console.log("routeToPost", post);
+        BlogActions.setCurrentBlogPost(post);
+        history.replaceState(null, '/blogs/' + BlogStore.getCurrentBlog().BLOG_PERMA_LINK + '/' + post.BLOG_POST_PERMA_LINK);
     },
 
     render: function() {
         return (
             <div>
                 <div className="blogHeader">
-                    <h2 className="mainBlogHeader">Blogs</h2>
+                    <h2 className="mainBlogHeader">{BlogConstants.BLOG_HEADER}</h2>
                 </div>
                 <div className="blogRoot">
                     <div className="blogPostsRoot">
@@ -43,7 +45,7 @@ var Blog = React.createClass({
                                     var dateArray = post.CREATE_DTTM.split(/[- :]/);
                                     var date = new Date(dateArray[0], dateArray[1]-1, dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
 
-                                    var boundClick = this._routeToPost.bind(this, post.BLOG_POST_PERMA_LINK);
+                                    var boundClick = this._routeToPost.bind(this, post);
                                     return (
                                         <span>
                                             <Paper className="blogPostsPaper">
@@ -65,7 +67,7 @@ var Blog = React.createClass({
                         </div>
                         <div className="blogPostsRightColumn">
                             <div className="blogInfo">
-                                <h1>Blog Information</h1>
+                                <h1>{BlogStore.getCurrentBlog().BLOG_TITLE}</h1>
                                 <p>{BlogStore.getCurrentBlog().BLOG_INFORMATION}</p>
                             </div>
                         </div>

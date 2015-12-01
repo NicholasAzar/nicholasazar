@@ -23,25 +23,21 @@ var BlogRow = React.createClass({
         var children;
         if (blogs.out_Own) {
             children = blogs.out_Own.map(function (child) {
-                return this._createItems(child); // on dat recursive level sheeee
+                return this._createItems(child);
             }.bind(this));
         }
         return (
             <ListItem
                 key={blogs.BLOG_ID}
                 value={blogs.BLOG_PERMA_LINK}
-                leftAvatar={this._getLeftAvatar(blogs)}
+                leftAvatar={this._getLeftAvatar(blogs.BLOG_POST_COUNT)}
                 primaryText={blogs.BLOG_TITLE}
                 secondaryText={blogs.BLOG_DESCRIPTION}
                 onTouchTap={this._onTouchTap.bind(this, blogs.BLOG_PERMA_LINK)}>{children}</ListItem>
         );
     },
 
-    _getLeftAvatar: function(blogs) {
-        var count = "0";
-        if (blogs.out_HasPost != null && blogs.out_HasPost.length > 0) {
-            count = blogs.out_HasPost.length.toString();
-        }
+    _getLeftAvatar: function(count) {
         return (
             <div className="blogLeftAvatar">{count}</div>
         );

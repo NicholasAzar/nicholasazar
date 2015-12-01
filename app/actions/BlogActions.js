@@ -1,7 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var BlogConstants = require('../constants/BlogConstants');
-var MockBlogData = require('../components/blog/MockBlogData');
 var $ = require('jquery');
 
 var BlogActions = {
@@ -27,11 +26,19 @@ var BlogActions = {
     },
 
     setCurrentBlog: function(blog)  {
-        console.log("BlogActions setCurrentBlog", blog);
         AppDispatcher.handleAction({
           type: BlogConstants.ActionTypes.SET_CURRENT_BLOG,
           json: blog,
           error: null
+        });
+    },
+
+    setCurrentBlogPost: function (post) {
+        console.log("BlogActions setCurrentBlogPost", post);
+        AppDispatcher.handleAction({
+            type: BlogConstants.ActionTypes.SET_CURRENT_POST,
+            json: post,
+            error: null
         });
     },
 
@@ -52,39 +59,6 @@ var BlogActions = {
                 console.log('BlogActions.getBlogPosts - Success received.', result);
                 AppDispatcher.handleAction({
                     type: AppConstants.ActionTypes.BLOG_POSTS_RESPONSE,
-                    json: result,
-                    error: null
-                });
-            }
-        });
-    },
-
-    getPost: function (rid) {
-        $.ajax({
-            type: 'POST',
-            url: 'http://example:8080/api/rs',
-            data: JSON.stringify({
-                category : 'blog',
-                name : 'getPost',
-                readOnly: true,
-                "data": {
-                    host: AppConstants.host,
-                    "@rid": rid
-                }
-            }),
-            contentType: 'application/json',
-            dataType: 'json',
-            error: function(jqXHR, status, error) {
-                console.log('BlogActions.getBlogPosts - Error received, using mock data.', error);
-                AppDispatcher.handleAction({
-                    type: AppConstants.ActionTypes.BLOG_POST_RESPONSE,
-                    json: MockBlogData.getPost(),
-                    error: null
-                });
-            },
-            success: function(result, status, xhr) {
-                AppDispatcher.handleAction({
-                    type: AppConstants.ActionTypes.BLOG_POST_RESPONSE,
                     json: result,
                     error: null
                 });

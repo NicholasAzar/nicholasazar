@@ -7,6 +7,7 @@ var {List, ListItem, Paper, Styles} = require('material-ui');
 var BlogStore = require('../../stores/BlogStore');
 var BlogAction = require('../../actions/BlogActions');
 var { Colors, Spacing, Typography } = Styles;
+var BlogConstants = require('../../constants/BlogConstants');
 
 var Blogs = React.createClass({
 
@@ -16,7 +17,7 @@ var Blogs = React.createClass({
         }
     },
 
-    componentDidMount: function() {
+    componentWillMount: function() {
         BlogStore.addChangeListener(this._onChange);
         BlogAction.getBlogs();
     },
@@ -31,7 +32,7 @@ var Blogs = React.createClass({
         return (
             <div className="blogs">
                 <div className="blogHeader">
-                        <h2 className="mainBlogHeader">Blogs</h2>
+                        <h2 className="mainBlogHeader">{BlogConstants.BLOG_HEADER}</h2>
                 </div>
                 <div className="blogsSection">
                     <div className="blogsDescription">

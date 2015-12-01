@@ -6,6 +6,7 @@ var _ = require('underscore');
 
 var _blogs = [];
 var _currentBlog = {};
+var _currentPost = {};
 var _blogPosts = [];
 var _post = {};
 
@@ -16,6 +17,10 @@ var BlogStore = _.extend({}, EventEmitter.prototype, {
 
     getCurrentBlog: function() {
         return _currentBlog;
+    },
+
+    getCurrentPost: function() {
+        return _currentPost;
     },
 
     getBlogPosts: function() {
@@ -59,6 +64,10 @@ AppDispatcher.register(function(payload) {
     } else if (data.type === BlogConstants.ActionTypes.SET_CURRENT_BLOG) { // When opening a blog, set this.
         console.log("BlogStore receive SET_CURRENT_BLOG:", data.json);
         _currentBlog = data.json;
+        BlogStore.emitChange();
+    } else if (data.type === BlogConstants.ActionTypes.SET_CURRENT_POST) {
+        console.log("BlogStore receive SET_CURRENT_POST:", data.json);
+        _currentPost = data.json;
         BlogStore.emitChange();
     }
     return true;
