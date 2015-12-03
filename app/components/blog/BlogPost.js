@@ -10,10 +10,16 @@ var marked = require('marked');
 
 var BlogPostView = React.createClass({
     componentWillMount: function() {
-      console.log("this.props", this.props);
-      this.setState({
-        post: BlogStore.getCurrentPost()
-      });
+      	console.log("this.props", this.props);
+
+        if (BlogStore.getCurrentPost()) {
+			BlogActions.getCurrentBlog(this.props.params.blogPermaLink);
+			BlogActions.getCurrentBlogPost(this.props.params.blogPermaLink, this.props.params.postPermaLink);
+		}
+
+		this.setState({
+        	post: BlogStore.getCurrentPost()
+      	});
     },
 
     render: function() {

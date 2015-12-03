@@ -9,26 +9,42 @@ var BlogConstants = require('../../constants/BlogConstants');
 var history = require('../common/history');
 
 var Blog = React.createClass({
-    componentDidMount: function() {
-        BlogStore.addChangeListener(this._receiveBlogPosts);
-        BlogActions.getBlogPosts(this.props.params.blogPermaLink);
-    },
+    componentWillMount: function() {
+		BlogStore.addChangeListener(this._receiveBlogPosts, BlogConstants.ActionTypes.GET_BLOG_POSTS);
+		BlogActions.getBlogPosts(this.props.params.blogPermaLink);
+
+		if (Object.keys(BlogStore.getCurrentBlog()).length === 0) {
+			console.log("Current blog empty, fetching");
+			BlogStore.addChangeListener(this._receiveCurrentBlog, BlogConstants.ActionTypes.GET_CURRENT_BLOG);
+			BlogActions.getCurrentBlog(this.props.params.blogPermaLink);
+		}
+	},
 
     getInitialState: function() {
         return {
-            blogPosts: []
+            blogPosts: [],
+			currentBlog: {}
         };
     },
 
     _receiveBlogPosts: function() {
+		console.log("Receive Blog Posts");
         this.setState({
             blogPosts: BlogStore.getBlogPosts()
-        })
+        });
     },
+
+	_receiveCurrentBlog: function() {
+		console.log("Receive current blog", BlogStore.getCurrentBlog());
+		this.setState({
+			currentBlog: BlogStore.getCurrentBlog()
+		});
+	},
+
     _routeToPost: function(post) {
         console.log("routeToPost", post);
         BlogActions.setCurrentBlogPost(post);
-        history.replaceState(null, '/blogs/' + BlogStore.getCurrentBlog().BLOG_PERMA_LINK + '/' + post.BLOG_POST_PERMA_LINK);
+        history.replaceState(null, '/blogs/' + this.state.currentBlog.BLOG_PERMA_LINK + '/' + post.BLOG_POST_PERMA_LINK);
     },
 
     render: function() {
@@ -67,8 +83,8 @@ var Blog = React.createClass({
                         </div>
                         <div className="blogPostsRightColumn">
                             <div className="blogInfo">
-                                <h1>{BlogStore.getCurrentBlog().BLOG_TITLE}</h1>
-                                <p>{BlogStore.getCurrentBlog().BLOG_INFORMATION}</p>
+                                <h1>{this.state.currentBlog.BLOG_TITLE}</h1>
+                                <p>{this.state.currentBlog.BLOG_INFORMATION}</p>
                             </div>
                         </div>
                     </div>

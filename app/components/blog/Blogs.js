@@ -18,7 +18,7 @@ var Blogs = React.createClass({
     },
 
     componentWillMount: function() {
-        BlogStore.addChangeListener(this._onChange);
+        BlogStore.addChangeListener(this._onChange, BlogConstants.ActionTypes.GET_BLOGS);
         BlogAction.getBlogs();
     },
 

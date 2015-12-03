@@ -31,16 +31,16 @@ var BlogStore = _.extend({}, EventEmitter.prototype, {
         return _post;
     },
 
-    emitChange: function() {
-        this.emit(AppConstants.ChangeEvents.BLOG_CHANGE_EVENT);
+    emitChange: function(event) {
+        this.emit(event);
     },
 
-    addChangeListener: function(callback) {
-        this.on(AppConstants.ChangeEvents.BLOG_CHANGE_EVENT, callback);
+    addChangeListener: function(callback, event) {
+        this.on(event, callback);
     },
 
-    removeChangeListener: function(callback) {
-        this.removeListener(AppConstants.ChangeEvents.BLOG_CHANGE_EVENT, callback);
+    removeChangeListener: function(callback, event) {
+        this.removeListener(event, callback);
     }
 
 });
@@ -49,26 +49,32 @@ AppDispatcher.register(function(payload) {
     console.log("BlogStore payload:", payload);
     var data = payload.action;
     if (data == null) return;
-    if (data.type === AppConstants.ActionTypes.BLOGS_RESPONSE) {
-        console.log("BlogStore received BLOGS:", data.json);
+    if (data.type === BlogConstants.ActionTypes.GET_BLOGS) {
+        console.log("BlogStore received GET_BLOGS:", data.json);
         _blogs = data.json;
-        BlogStore.emitChange();
-    } else if (data.type === AppConstants.ActionTypes.BLOG_POSTS_RESPONSE) {
-        console.log("BlogStore received BLOG_POSTS:", data.json);
+        BlogStore.emitChange(BlogConstants.ActionTypes.GET_BLOGS);
+    } else if (data.type === BlogConstants.ActionTypes.GET_BLOG_POSTS) {
+        console.log("BlogStore received GET_BLOG_POSTS:", data.json);
         _blogPosts = data.json;
-        BlogStore.emitChange();
-    } else if (data.type === AppConstants.ActionTypes.BLOG_POST_RESPONSE) {
-        console.log("BlogStore received BLOG_POST:", data.json);
+        BlogStore.emitChange(BlogConstants.ActionTypes.GET_BLOG_POSTS);
+    } else if (data.type === BlogConstants.ActionTypes.GET_CURRENT_POST) {
+        console.log("BlogStore received GET_CURRENT_POST:", data.json);
         _post = data.json;
-        BlogStore.emitChange();
+        BlogStore.emitChange(BlogConstants.ActionTypes.GET_CURRENT_POST);
+    } else if (data.type === BlogConstants.ActionTypes.GET_CURRENT_BLOG) {
+        console.log("BlogStore received GET_CURRENT_BLOG:", data.json);
+		if (data.json && data.json.length > 0) {
+			_currentBlog = data.json[0];
+		}
+        BlogStore.emitChange(BlogConstants.ActionTypes.GET_CURRENT_BLOG);
     } else if (data.type === BlogConstants.ActionTypes.SET_CURRENT_BLOG) { // When opening a blog, set this.
         console.log("BlogStore receive SET_CURRENT_BLOG:", data.json);
         _currentBlog = data.json;
-        BlogStore.emitChange();
+        BlogStore.emitChange(BlogConstants.ActionTypes.SET_CURRENT_BLOG);
     } else if (data.type === BlogConstants.ActionTypes.SET_CURRENT_POST) {
         console.log("BlogStore receive SET_CURRENT_POST:", data.json);
         _currentPost = data.json;
-        BlogStore.emitChange();
+        BlogStore.emitChange(BlogConstants.ActionTypes.SET_CURRENT_POST);
     }
     return true;
 });
