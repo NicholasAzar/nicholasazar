@@ -1,5 +1,10 @@
+@import "../../base/colors";
+@import "../../base/typography";
+@import "../../base/globalVariables";
+@import "blogVariables";
+
 .blogPostRoot {
-  background-color: #EFEFEF;
+  background-color: $mainBackgroundColor;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,21 +18,21 @@
 
     .title {
       font-size: 2 * $blogPostContentText;
-      font-weight: $font-weight-light;
+      font-weight: $fontWeightLight;
       line-height: 72px;
       font-family: Lato serif;
-      color: $colors-green300;
+      color: $mainForegroundColor;
       margin-bottom: 10px;
     }
     .date {
       font-size: $blogPostContentText;
-      font-weight: $font-weight-light;
+      font-weight: $fontWeightLight;
       color: black;
       margin-bottom: 50px;
     }
     .content {
       font-size: $blogPostContentText;
-      font-weight: $font-weight-light;
+      font-weight: $fontWeightLight;
       line-height: 40px;
     }
   }
@@ -35,20 +40,19 @@
     width: 96.7%;
     margin-top: 30px;
     line-height: 1.2;
-    padding: 30px;
-    padding-top: 0;
-    font-family: Roboto;
+    padding: 0 30px 30px;
+    font-family: Roboto, sans-serif;
     color: #999;
     h1 {
       margin-bottom: 20px;
       margin-top: 5px;
       
       .author {
-        color: $colors-green300;
+        color: $mainForegroundColor;
       }
     }
     p {
-      font-weight: $font-weight-light;
+      font-weight: $fontWeightLight;
       font-size: 1em;
     }
   }

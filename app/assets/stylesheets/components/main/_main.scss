@@ -1,0 +1,56 @@
+@import "../../base/colors";
+@import "../../base/typography";
+@import "../../base/spacing";
+
+.mainRoot {
+  position: relative;
+  margin: 64px 0 120px 0;
+  overflow: hidden;
+}
+
+.mainFooter {
+  background-color: $grey800;
+  text-align: center;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  z-index: -10;
+  .footerText {
+    top: 50%;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: $lightWhite;
+  }
+}
+
+.appBarRightIcon {
+  color: rgba(255, 255, 255, 0.90);
+}
+
+//.a {
+//  color: Colors.red;
+//}
+//
+//.rightMenuButton {
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  background-color: Colors.transparent;
+//  color: Typography.textFullWhite;
+//  margin: 0;
+//  padding-top: 6px;
+//}
+
+.mainAppBar {
+  background-color: $mainForegroundColor;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+}

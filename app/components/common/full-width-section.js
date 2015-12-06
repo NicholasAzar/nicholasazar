@@ -1,6 +1,6 @@
 var React = require('react');
 var { ClearFix, Mixins, Styles } = require('material-ui');
-var { StylePropable, StyleResizable } = Mixins;
+var { StylePropable, StyleResizable} = Mixins;
 var DesktopGutter = Styles.Spacing.desktopGutter;
 
 

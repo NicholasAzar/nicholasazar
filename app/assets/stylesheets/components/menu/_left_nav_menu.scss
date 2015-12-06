@@ -1,0 +1,16 @@
+@import "../../base/spacing";
+@import "../../base/colors";
+@import "../../base/typography";
+@import "../../base/globalVariables";
+
+.leftNavRoot {
+  cursor: pointer;
+  font-size: 24px;
+  color: $fullWhite;
+  line-height: $desktopKeylineIncrement;
+  font-weight: $fontWeightLight;
+  background-color: $mainForegroundColor;
+  padding-left: $desktopGutter;
+  padding-top: 0;
+  margin-bottom: 0;
+}

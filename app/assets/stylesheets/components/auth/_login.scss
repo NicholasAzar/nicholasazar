@@ -1,5 +1,6 @@
+@import '../../base/colors';
 .loginRoot {
-  background-color: $colors-backgroundGrey;
+  background-color: $grey300;
   display:flex;
   align-items: center;
   justify-content: center;

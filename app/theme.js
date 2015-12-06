@@ -7,8 +7,8 @@ module.exports = {
   spacing: Spacing,
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: Colors.green500,
-    primary2Color: Colors.green700,
+    primary1Color: Colors.green300,
+    primary2Color: Colors.green500,
     primary3Color: Colors.lightBlack,
     accent1Color: Colors.pinkA200,
     accent2Color: Colors.grey100,
@@ -19,7 +19,7 @@ module.exports = {
     borderColor: Colors.grey300,
     disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
     menuSubheader: {
-      textColor: Colors.green300
+      textColor: Colors.green500
     }
-  },
+  }
 };

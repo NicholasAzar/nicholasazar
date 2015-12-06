@@ -1,8 +1,9 @@
-$blogPostSpacing: 15px;
-$blogPostContentText: 24px;
+@import "blogVariables";
+@import "../../base/globalVariables";
+@import "../../base/typography";
 
 .blogRoot {
-  background-color: $colors-backgroundGrey;
+  background-color: $mainBackgroundColor;
   padding: 20px;
 }
 
@@ -11,7 +12,7 @@ $blogPostContentText: 24px;
   width:100%;
   display: flex;
   flex-direction: row;
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
 
   .blogPostsPaper {
     margin-bottom: $blogPostSpacing;
@@ -28,7 +29,7 @@ $blogPostContentText: 24px;
     }
     .title {
       font-size: 2 * $blogPostContentText;
-      font-weight: $font-weight-light;
+      font-weight: $fontWeightLight;
       line-height: 72px;
       font-family: Lato serif;
       a {
@@ -39,12 +40,12 @@ $blogPostContentText: 24px;
     }
     .year {
       font-size: $blogPostContentText;
-      font-weight: $font-weight-light;
+      font-weight: $fontWeightLight;
       color: black
     }
     .content {
       font-size: $blogPostContentText;
-      font-weight: $font-weight-light;
+      font-weight: $fontWeightLight;
       line-height: 40px;
     }
   }
@@ -75,14 +76,14 @@ $blogPostContentText: 24px;
   padding-top: 10px;
   
   .blogInfo {
-    font-family: Roboto;
+    font-family: Roboto, sans-serif;
     color: $textColorOverGreyBackground;
     h1 {
       margin-bottom: 20px;
       margin-top: 5px;
     }
     p {
-      font-weight: $font-weight-light;
+      font-weight: $fontWeightLight;
       font-size: 1em;
     }
   }

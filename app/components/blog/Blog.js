@@ -9,14 +9,16 @@ var BlogConstants = require('../../constants/BlogConstants');
 var history = require('../common/history');
 
 var Blog = React.createClass({
-    componentWillMount: function() {
+	componentDidMount: function() {
 		BlogStore.addChangeListener(this._receiveBlogPosts, BlogConstants.ActionTypes.GET_BLOG_POSTS);
 		BlogActions.getBlogPosts(this.props.params.blogPermaLink);
-
 		if (Object.keys(BlogStore.getCurrentBlog()).length === 0) {
-			console.log("Current blog empty, fetching");
 			BlogStore.addChangeListener(this._receiveCurrentBlog, BlogConstants.ActionTypes.GET_CURRENT_BLOG);
 			BlogActions.getCurrentBlog(this.props.params.blogPermaLink);
+		} else {
+			this.setState({
+				currentBlog: BlogStore.getCurrentBlog()
+			})
 		}
 	},
 
@@ -28,21 +30,18 @@ var Blog = React.createClass({
     },
 
     _receiveBlogPosts: function() {
-		console.log("Receive Blog Posts");
         this.setState({
             blogPosts: BlogStore.getBlogPosts()
         });
     },
 
 	_receiveCurrentBlog: function() {
-		console.log("Receive current blog", BlogStore.getCurrentBlog());
 		this.setState({
 			currentBlog: BlogStore.getCurrentBlog()
 		});
 	},
 
     _routeToPost: function(post) {
-        console.log("routeToPost", post);
         BlogActions.setCurrentBlogPost(post);
         history.replaceState(null, '/blogs/' + this.state.currentBlog.BLOG_PERMA_LINK + '/' + post.BLOG_POST_PERMA_LINK);
     },
