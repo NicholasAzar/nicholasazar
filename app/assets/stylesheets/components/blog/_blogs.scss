@@ -6,23 +6,6 @@
   background-color: $mainBackgroundColor;
 }
 
-.blogHeader {
-  background-color: $mainForegroundColor;
-  overflow: hidden;
-  width: 100%;
-  padding: 55px 0;
-  margin: 0;
-  text-align: center;
-
-  .mainBlogHeader {
-    font-size: 30px;
-    color: $darkWhite;
-    font-weight: $fontWeightLight;
-  }
-}
-
-
-
 .blogsSection {
   //width: 100%; This causes bad behavious with flexbox
   display: flex;

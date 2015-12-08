@@ -18,7 +18,7 @@ var Main = React.createClass({
 	},
 
     _userMenuTouched: function(e, value) {
-        history.replaceState(null, '/' + value._store.props.value);
+        history.replaceState(null, '/contact');
     },
 
     render: function() {
@@ -26,7 +26,7 @@ var Main = React.createClass({
 
         var rightMenu = (
             <div>
-              <IconButton iconClassName="material-icons" iconStyle={{color: 'rgba(255, 255, 255, 0.90)'}} onItemTouchTap={this._userMenuTouched}>chat</IconButton>
+              <IconButton iconClassName="material-icons" iconStyle={{color: 'rgba(255, 255, 255, 0.90)'}} onClick={this._userMenuTouched}>chat</IconButton>
             </div>
         );
 

@@ -15,26 +15,26 @@ var MenuStore = _.extend({}, EventEmitter.prototype, {
         return [
             { type: MenuItem.Types.SUBHEADER, text: 'Menu' },
             { route: 'blogs', text: 'Blog'},
-            { route: 'contactMe', text: 'Contact Me'},
-            { type: MenuItem.Types.SUBHEADER, text: 'External'},
+            { route: 'contact', text: 'Contact Me'},
+            { type: MenuItem.Types.SUBHEADER, text: 'Find Me'},
+			{
+				type: MenuItem.Types.LINK,
+				payload: 'https://github.com/NicholasAzar',
+				text: 'GitHub'
+			},
             {
                 type: MenuItem.Types.LINK,
-                payload: 'https://github.com/NicholasAzar',
-                text: 'GitHub'
-            },
-            {
-                type: MenuItem.Types.LINK,
-                payload: 'https://github.com/NicholasAzar',
+                payload: 'https://ca.linkedin.com/in/nicholas-azar-74532933',
                 text: 'LinkedIn'
             },
             {
                 type: MenuItem.Types.LINK,
-                payload: 'https://github.com/NicholasAzar',
+                payload: 'https://www.facebook.com/FDDoSD',
                 text: 'Facebook'
             },
             {
                 type: MenuItem.Types.LINK,
-                payload: 'https://github.com/NicholasAzar',
+                payload: 'https://twitter.com/NicholasAzar',
                 text: 'Twitter'
             }
         ];

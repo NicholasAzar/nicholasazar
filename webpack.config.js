@@ -49,7 +49,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['babel'],
+                loaders: ['babel-loader?optional=runtime&stage=0'],
                 exclude: [nodeModulesPath]
             },
             {

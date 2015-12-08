@@ -46,21 +46,12 @@ var LeftNavMenu = React.createClass({
                 isInitiallyOpen={false}
                 header={header}
                 menuItems={this.state.menu}
-                selectedIndex={this.getSelectedIndex()}
                 onChange={this.onLeftNavChange} />
         );
     },
 
     toggle: function() {
         this.refs.leftNav.toggle();
-    },
-
-    getSelectedIndex: function() {
-        var currentItem;
-        for (var i = this.state.menu.length - 1; i >= 0; i--) {
-            currentItem = this.state.menu[i];
-            if (currentItem.route) return i;
-        }
     },
 
     onLeftNavChange: function(e, key, payload) {
