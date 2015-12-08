@@ -49,8 +49,8 @@ var Blog = React.createClass({
     render: function() {
         return (
             <div>
-                <div className="blogHeader">
-                    <h2 className="mainBlogHeader">{BlogConstants.BLOG_HEADER}</h2>
+                <div className="header">
+                    <h2 className="headerContent">{BlogConstants.BLOG_HEADER}</h2>
                 </div>
                 <div className="blogRoot">
                     <div className="blogPostsRoot">

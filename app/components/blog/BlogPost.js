@@ -28,8 +28,8 @@ var BlogPostView = React.createClass({
 
       return (
             <div>
-                <div className="blogHeader">
-                    <h2 className="mainBlogHeader">{BlogConstants.BLOG_HEADER}</h2>
+                <div className="header">
+                    <h2 className="headerContent">{BlogConstants.BLOG_HEADER}</h2>
                 </div>
                 <div className="blogPostRoot">
                     <Paper className="blogPostPaper">
