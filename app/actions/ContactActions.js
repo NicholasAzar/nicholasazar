@@ -16,9 +16,11 @@ var ContactActions = {
 				text: text
 			},
 			error: function (jqXHR, status, error) {
+				console.log("error contact", error);
 				//setTimeout(this.getBlogs, 10000); // try again every 10 seconds
 			},
 			success: function (result, status, xhr) {
+				console.log("success contact", result);
 				// add a listener to this to validate successful message.
 				AppDispatcher.handleAction({
 					type: ContactConstants.ActionTypes.SUBMIT_CONTACT,

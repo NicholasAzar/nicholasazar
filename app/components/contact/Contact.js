@@ -7,22 +7,41 @@ var ContactActions = require ('../../actions/ContactActions');
 var history = require('../common/history');
 
 var Contact = React.createClass({
-	// Add validation.
-	onNameChange: function() {
 
+	// Default values
+	getInitialState: function() {
+		return ({
+			name: '',
+			email: '',
+			text: ''
+		});
 	},
-	onEmailChange: function() {
 
+	// TODO: Add validation.
+	onNameChange: function(e) {
+		this.setState({
+			name: e.target.value
+		});
 	},
-	onTextChange: function() {
+	onEmailChange: function(e) {
+		this.setState({
+			email: e.target.value
+		});
+	},
+	onTextChange: function(e) {
+		this.setState({
+			text: e.target.value
+		});
+	},
 
-	},
+	// Action buttons
 	onSubmit: function () {
-		ContactActions.submitContact(this.props.refs.name.getValue(), this.props.refs.email.getValue(), this.props.refs.text.getValue());
+		ContactActions.submitContact(this.state.name, this.state.email, this.state.text);
 	},
 	onHome: function () {
 		history.replaceState(null, '/');
 	},
+
 	render: function() {
 		return (
 			<div>
@@ -32,9 +51,14 @@ var Contact = React.createClass({
 				<div className="contactRoot">
 					<Paper className="contactPaper">
 						<div className="contactFormFields">
-							<div><TextField floatingLabelText="Name" ref="name" /></div>
-							<div><TextField floatingLabelText="Email" ref="email" /></div>
-							<div><TextField floatingLabelText="Text" ref="text" /></div>
+							<div><TextField floatingLabelText="Name" value={this.state.name} onChange={this.onNameChange}/></div>
+							<div><TextField floatingLabelText="Email" value={this.state.email} onChange={this.onEmailChange}/></div>
+							<div><TextField floatingLabelText="Text"
+											value={this.state.text}
+											onChange={this.onTextChange}
+											ref="text"
+											multiLine={true}
+											rowsMax={20}/></div>
 						</div>
 						<div className="contactFormButtons">
 							<RaisedButton label="Submit" secondary={true} onTouchTap={this.onSubmit}/>
