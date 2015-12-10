@@ -5,3 +5,4 @@
 *.iws
 node_modules/*
 dist/*
+app/constants/ReCaptchaKey.js
