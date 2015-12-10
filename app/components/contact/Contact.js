@@ -128,7 +128,7 @@ var Contact = React.createClass({
 						</div>
 						<div className="contactFormButtons">
 							<RefreshIndicator size={30} left={40} top={2} status={this.state.refreshIndicator} />
-							<RaisedButton label="Submit" secondary={true} onTouchTap={this.onSubmit} disabled={this.state.submitButtonDisabled}/>
+							<RaisedButton label="Submit" secondary={true} onTouchTap={this.onSubmit} disabled={this.state.submitButtonDisabled} style={{marginRight: '5px'}}/>
 							<RaisedButton label="Home" primary={true} onTouchTap={this.onHome}/>
 						</div>
 					</Paper>
