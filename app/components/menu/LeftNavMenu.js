@@ -10,7 +10,8 @@ var LeftNavMenu = React.createClass({
 
     getInitialState: function() {
         return {
-            menu: []
+            menu: [],
+			selectedIndex: 0
         }
     },
 
@@ -46,6 +47,7 @@ var LeftNavMenu = React.createClass({
                 isInitiallyOpen={false}
                 header={header}
                 menuItems={this.state.menu}
+				selectedIndex={this.state.selectedIndex}
                 onChange={this.onLeftNavChange} />
         );
     },
@@ -54,7 +56,20 @@ var LeftNavMenu = React.createClass({
         this.refs.leftNav.toggle();
     },
 
+	recomputeSelectedIndex(route) {
+		let newSelectedIndex = 0;
+		for (let i = 0; i < this.state.menu.length; i++) {
+			if (this.state.menu[i].route === route) {
+				newSelectedIndex = i;
+			}
+		}
+		this.setState({
+			selectedIndex: newSelectedIndex
+		});
+	},
+
     onLeftNavChange: function(e, key, payload) {
+		this.recomputeSelectedIndex(payload.route);
         history.replaceState(null, payload.route);
     },
 
