@@ -21,23 +21,15 @@ var LeftNavMenu = React.createClass({
     },
 
     _onMenuChange: function() {
-        var newMenu = MenuStore.getDefaultMenu();
-        this.setState({
-            menu: newMenu
-        })
-    },
-
-    getStyles: function() {
-        return {
-            root: {
-
-            }
-        };
-    },
+		var newMenu = MenuStore.getDefaultMenu();
+		this.setState({
+			menu: newMenu
+		})
+	},
 
     render: function() {
         var header = (
-            <div className="leftNavRoot" onTouchTap={this.onHeaderClick}>Nicholas Azar</div>
+            <div className="leftNavRoot" onTouchTap={this.onLeftNavChange}>Nicholas Azar</div>
         );
 
         return (
@@ -69,13 +61,13 @@ var LeftNavMenu = React.createClass({
 	},
 
     onLeftNavChange: function(e, key, payload) {
-		this.recomputeSelectedIndex(payload.route);
-        history.replaceState(null, payload.route);
-    },
-
-    onHeaderClick: function () {
-        history.replaceState(null, '/');
-        this.refs.leftNav.close();
+		let route = '/';
+		if (payload.route) {
+			route = payload.route;
+		}
+		this.recomputeSelectedIndex(route);
+        history.replaceState(null, route);
+		this.refs.leftNav.close();
     }
 });
 module.exports = LeftNavMenu;
