@@ -16,6 +16,7 @@ var MenuStore = _.extend({}, EventEmitter.prototype, {
             { type: MenuItem.Types.SUBHEADER, text: 'Menu' },
             { route: 'blogs', text: 'Blog'},
             { route: 'contact', text: 'Contact Me'},
+			{ route: 'shop', text: 'Shop'},
             { type: MenuItem.Types.SUBHEADER, text: 'Find Me'},
 			{
 				type: MenuItem.Types.LINK,

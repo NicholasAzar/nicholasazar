@@ -9,6 +9,7 @@ var Blogs = require('./components/blog/Blogs');
 var Blog = require('./components/blog/Blog');
 var BlogPost = require('./components/blog/BlogPost.js');
 var Contact = require('./components/contact/Contact');
+var Shop = require('./components/shop/Shop');
 require('./assets/stylesheets/main.scss');
 window.React = React;
 
@@ -23,6 +24,7 @@ ReactDOM.render(
 			<Route path="blogs/:blogPermaLink" component={Blog}/>
 			<Route path="blogs/:blogPermaLink/:postPermaLink" component={BlogPost}/>
 			<Route path="contact" component={Contact} />
+			<Route path="shop" component={Shop} />
 			<Route path="*" component={Home}/>
 		</Route>
 	</Router>, document.getElementById('content')
