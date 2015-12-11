@@ -1,6 +1,14 @@
 .shop {
   display: flex;
-  flex-grow: 4;
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
+  .product {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 400px
+  }
 }
