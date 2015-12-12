@@ -19,17 +19,21 @@ var Shop = React.createClass({
 				{
 					this.state.products.map(function(product){
 						return (
-							<div className="product">
-								<div className="productDisplay">
-									<img src="http://lorempixel.com/300/350/nature/"/>
-									<span className="productOverlay">
-										<span className="productTitle">Title</span>
-										<span className="productSubtitle">Subtitle</span>
-									</span>
-								</div>
-								<div className="productButtons">
-									<RaisedButton label="Action1"/>
-									<RaisedButton label="Action2"/>
+							<div className="productWrapper">
+								<div className="product">
+									<div className="productDisplay">
+										<img src="http://lorempixel.com/300/350/nature/"/>
+										<span className="productOverlay">
+											<span className="productTextOverlay">
+												<span className="productTitle">Title</span>
+												<span className="productSubtitle">Subtitle</span>
+											</span>
+										</span>
+									</div>
+									<div className="productButtons">
+										<RaisedButton label="View Full" secondary={true} style={{margin: '5px'}}/>
+										<RaisedButton label="Buy" primary={true} style={{margin: '5px'}}/>
+									</div>
 								</div>
 							</div>
 						);
