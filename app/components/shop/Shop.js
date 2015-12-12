@@ -12,31 +12,31 @@ var Shop = React.createClass({
 					title: 'Title1',
 					subTitle: 'Subtitle',
 					imageLink: 'http://lorempixel.com/300/350/nature/',
-					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px', textAlign: 'center'}} linkButton={true} href="google.com"/>)
 				},
 				{
 					title: 'Title2',
 					subTitle: 'Subtitle',
 					imageLink: 'http://lorempixel.com/300/350/nature/',
-					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px', textAlign: 'center'}} linkButton={true} href="google.com"/>)
 				},
 				{
 					title: 'Title3',
 					subTitle: 'Subtitle',
 					imageLink: 'http://lorempixel.com/300/350/nature/',
-					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px', textAlign: 'center'}} linkButton={true} href="google.com"/>)
 				},
 				{
 					title: 'Title4',
 					subTitle: 'Subtitle',
 					imageLink: 'http://lorempixel.com/300/350/nature/',
-					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px', textAlign: 'center'}} linkButton={true} href="google.com"/>)
 				},
 				{
 					title: 'Title5',
 					subTitle: 'Subtitle',
 					imageLink: 'http://lorempixel.com/300/350/nature/',
-					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px', textAlign: 'center'}} linkButton={true} href="google.com"/>)
 				}
 			],
 			dialogIsDisplayed: false,

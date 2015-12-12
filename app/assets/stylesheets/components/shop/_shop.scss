@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   background-color: $mainBackgroundColor;
   .productWrapper {
     height: 450px;
@@ -16,7 +18,11 @@
     align-items: center;
     .product {
       height: 400px;
+      padding-left: 5px;
+      padding-right: 5px;
       .productDisplay {
+        height: 350px;
+        width: 300px;
         display: flex;
         justify-content: center;
         align-items: center;
