@@ -11,7 +11,7 @@ var Shop = React.createClass({
 				{
 					title: 'Title1',
 					subTitle: 'Subtitle',
-					imageLink: 'http://lorempixel.com/300/350/nature/',
+					imageLink: 'http://lorempixel.com/400/450/nature/',
 					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px', textAlign: 'center'}} linkButton={true} href="google.com"/>)
 				},
 				{
