@@ -11,27 +11,32 @@ var Shop = React.createClass({
 				{
 					title: 'Title1',
 					subTitle: 'Subtitle',
-					imageLink: 'http://lorempixel.com/300/350/nature/'
+					imageLink: 'http://lorempixel.com/300/350/nature/',
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
 				},
 				{
 					title: 'Title2',
 					subTitle: 'Subtitle',
-					imageLink: 'http://lorempixel.com/300/350/nature/'
+					imageLink: 'http://lorempixel.com/300/350/nature/',
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
 				},
 				{
 					title: 'Title3',
 					subTitle: 'Subtitle',
-					imageLink: 'http://lorempixel.com/300/350/nature/'
+					imageLink: 'http://lorempixel.com/300/350/nature/',
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
 				},
 				{
 					title: 'Title4',
 					subTitle: 'Subtitle',
-					imageLink: 'http://lorempixel.com/300/350/nature/'
+					imageLink: 'http://lorempixel.com/300/350/nature/',
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
 				},
 				{
 					title: 'Title5',
 					subTitle: 'Subtitle',
-					imageLink: 'http://lorempixel.com/300/350/nature/'
+					imageLink: 'http://lorempixel.com/300/350/nature/',
+					buyButtonHtml: React.renderToString(<RaisedButton label="Buy" primary={true} style={{margin: '5px'}} linkButton={true} href="google.com"/>)
 				}
 			],
 			dialogIsDisplayed: false,
@@ -48,6 +53,7 @@ var Shop = React.createClass({
 			dialogImage: product.imageLink
 		})
 	},
+
 	onViewClose: function() {
 		this.setState({
 			dialogIsDisplayed: false,
@@ -77,7 +83,7 @@ var Shop = React.createClass({
 									</div>
 									<div className="productButtons">
 										<RaisedButton label="View Full" onTouchTap={this.onViewFull.bind(this, product)} secondary={true} style={{margin: '5px'}}/>
-										<RaisedButton label="Buy" primary={true} style={{margin: '5px'}}/>
+										<span dangerouslySetInnerHTML={{__html:product.buyButtonHtml}} />
 									</div>
 								</div>
 							</div>
