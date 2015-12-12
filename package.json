@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "webpack-dev-server --progess --colors",
-    "watch": "webpack --progress --colors --watch",
+    "watch": "webpack -d --progress --colors --watch",
     "lint": "eslint app",
     "prod": "webpack -p --config prod.webpack.config.js"
   },

@@ -6,7 +6,7 @@ const RaisedButton = require('material-ui/lib/raised-button');
 var Shop = React.createClass({
 	getInitialState: function() {
 		return({
-			products: [{test: "test"}]
+			products: [{test: "test"}, {test: "test"}, {test: "test"}, {test: "test"}, {test: "test"}]
 		});
 	},
 	render: function() {
@@ -22,8 +22,10 @@ var Shop = React.createClass({
 							<div className="product">
 								<div className="productDisplay">
 									<img src="http://lorempixel.com/300/350/nature/"/>
-									<span className="productTitle">Title</span>
-									<span className="productSubtitle">Subtitle</span>
+									<span className="productOverlay">
+										<span className="productTitle">Title</span>
+										<span className="productSubtitle">Subtitle</span>
+									</span>
 								</div>
 								<div className="productButtons">
 									<RaisedButton label="Action1"/>
