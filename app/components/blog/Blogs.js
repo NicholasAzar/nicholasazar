@@ -1,12 +1,8 @@
 var React =  require('react');
-var FullWidthSection = require('../common/full-width-section.js');
-var BlogStore = require('../../stores/BlogStore');
-var BlogAction = require('../../actions/BlogActions');
 var BlogRow = require('./BlogRow');
-var {List, ListItem, Paper, Styles} = require('material-ui');
+var {List, Paper} = require('material-ui');
 var BlogStore = require('../../stores/BlogStore');
 var BlogAction = require('../../actions/BlogActions');
-var { Colors, Spacing, Typography } = Styles;
 var BlogConstants = require('../../constants/BlogConstants');
 
 var Blogs = React.createClass({
@@ -59,7 +55,7 @@ var Blogs = React.createClass({
     },
 
     componentWillUnmount: function() {
-        BlogStore.removeChangeListener(this._onChange);
+        BlogStore.removeChangeListener(this._onChange, BlogConstants.ActionTypes.GET_BLOGS);
     }
 
 });

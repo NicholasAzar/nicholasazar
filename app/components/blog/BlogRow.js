@@ -1,7 +1,7 @@
 var React = require('react');
-var {ListItem, Styles, Avatar} = require('material-ui')
+var {ListItem} = require('material-ui');
 var BlogActions = require('../../actions/BlogActions');
-var { Colors, Spacing, Typography} = Styles;
+const BlogConstants = require('../../constants/BlogConstants');
 
 var history = require('../common/history');
 
@@ -21,19 +21,18 @@ var BlogRow = React.createClass({
 
     _createItems: function (blogs) {
         var children;
-        if (blogs.out_Own) {
-            children = blogs.out_Own.map(function (child) {
+        if (blogs[BlogConstants.BLOG_CHILDREN_KEY]) {
+            children = blogs[BlogConstants.BLOG_CHILDREN_KEY].map(function (child) {
                 return this._createItems(child);
             }.bind(this));
         }
         return (
             <ListItem
-                key={blogs.BLOG_ID}
-                value={blogs.BLOG_PERMA_LINK}
-                leftAvatar={this._getLeftAvatar(blogs.BLOG_POST_COUNT)}
-                primaryText={blogs.BLOG_TITLE}
-                secondaryText={blogs.BLOG_DESCRIPTION}
-                onTouchTap={this._onTouchTap.bind(this, blogs.BLOG_PERMA_LINK)}>{children}</ListItem>
+                key={blogs[BlogConstants.BLOG_KEY_KEY]}
+                leftAvatar={this._getLeftAvatar(blogs[BlogConstants.BLOG_POST_COUNT_KEY])}
+                primaryText={blogs[BlogConstants.BLOG_TITLE_KEY]}
+                secondaryText={blogs[BlogConstants.BLOG_DESC_KEY]}
+                onTouchTap={this._onTouchTap.bind(this, blogs[BlogConstants.BLOG_PARAM_KEY])}>{children}</ListItem>
         );
     },
 

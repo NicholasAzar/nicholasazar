@@ -1,9 +1,8 @@
 var React =  require('react');
 var {Link} = require('react-router');
-var FullWidthSection = require('../common/full-width-section.js');
 var BlogStore = require('../../stores/BlogStore');
 var BlogActions = require('../../actions/BlogActions');
-var {List, ListItem, Paper, RaisedButton} = require('material-ui');
+var {Paper, RaisedButton} = require('material-ui');
 var AppConstants = require('../../constants/AppConstants');
 var BlogConstants = require('../../constants/BlogConstants');
 var history = require('../common/history');
@@ -43,7 +42,7 @@ var Blog = React.createClass({
 
     _routeToPost: function(post) {
         BlogActions.setCurrentBlogPost(post);
-        history.replaceState(null, '/blogs/' + this.state.currentBlog.BLOG_PERMA_LINK + '/' + post.BLOG_POST_PERMA_LINK);
+        history.replaceState(null, '/blogs/' + this.state.currentBlog[BlogConstants.BLOG_PARAM_KEY] + '/' + post[BlogConstants.BLOG_POST_PARAM_KEY]);
     },
 
     render: function() {
@@ -57,7 +56,7 @@ var Blog = React.createClass({
                         <div className="blogPostsleftColumn">
                             {
                                 this.state.blogPosts.map(function(post) {
-                                    var dateArray = post.CREATE_DTTM.split(/[- :]/);
+                                    var dateArray = post[BlogConstants.BLOG_POST_DATE_KEY].split(/[- :]/);
                                     var date = new Date(dateArray[0], dateArray[1]-1, dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
 
                                     var boundClick = this._routeToPost.bind(this, post);
@@ -68,9 +67,9 @@ var Blog = React.createClass({
                                                     <h2>
                                                         <strong className="strongDate">{AppConstants.monthNames[date.getMonth()]} {date.getDate()},</strong> <span className="year">{date.getFullYear()}</span>
                                                     </h2>
-                                                    <h1 className="title"><a onClick={boundClick}>{post.BLOG_POST_TITLE}</a></h1>
+                                                    <h1 className="title"><a onClick={boundClick}>{post[BlogConstants.BLOG_POST_TITLE_KEY]}</a></h1>
                                                     <p className="content">
-                                                        {post.BLOG_POST_DESCRIPTION}
+                                                        {post[BlogConstants.BLOG_POST_DESC_KEY]}
                                                     </p>
                                                 </div>
                                             </Paper>
@@ -82,8 +81,8 @@ var Blog = React.createClass({
                         </div>
                         <div className="blogPostsRightColumn">
                             <div className="blogInfo">
-                                <h1>{this.state.currentBlog.BLOG_TITLE}</h1>
-                                <p>{this.state.currentBlog.BLOG_INFORMATION}</p>
+                                <h1>{this.state.currentBlog[BlogConstants.BLOG_TITLE_KEY]}</h1>
+                                <p>{this.state.currentBlog[BlogConstants.BLOG_INFO_KEY]}</p>
                             </div>
                         </div>
                     </div>
@@ -94,7 +93,11 @@ var Blog = React.createClass({
                 </div>
             </div>
         );
-    }
+    },
+	componentWillUnmount: function() {
+		BlogStore.removeChangeListener(this._receiveBlogPosts, BlogConstants.ActionTypes.GET_BLOG_POSTS)
+		BlogStore.removeChangeListener(this._receiveCurrentBlog, BlogConstants.ActionTypes.GET_CURRENT_BLOG);
+	}
 });
 
 module.exports = Blog;
